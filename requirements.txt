@@ -1,25 +1,7 @@
-flask
-streamlit
-
-tensorflow
-numpy
-pillow
-matplotlib
-
-# LangChain Core
-langchain
-langchain-core 
-langchain-community
-
-# Hugging Face Integration
-langchain-huggingface 
-transformers 
-huggingface-hub 
-
-# Environment Variable Management
-python-dotenv
-
-grandalf
-
-reportlab
-gradio_client
+vFlask==3.0.3
+gunicorn==21.2.0
+gradio_client==0.16.4
+pillow==10.4.0
+numpy==1.26.4
+reportlab==4.2.2
+python-dotenv==1.0.1
