@@ -20,7 +20,7 @@ from pydantic import BaseModel
 from reportlab.lib.utils import ImageReader
 from huggingface_hub import hf_hub_download
 
-from gradio_client import Client, handle_file
+from gradio_client import Client
 
 
 
@@ -101,7 +101,7 @@ client = Client("ParthHuggFace/modelbackedn")
 def predict_acne(img_path):
     try:
         result = client.predict(
-            handle_file(img_path),
+            img_path,
             api_name="/predict"
         )
 
