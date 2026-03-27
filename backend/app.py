@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for,session,sen
 #from tensorflow import keras 
 #import tensorflow as tf
 #from keras.models import load_model
-from keras.preprocessing.image  import img_to_array
+#from keras.preprocessing.image  import img_to_array
 import numpy as np
 from PIL import Image
 import os
