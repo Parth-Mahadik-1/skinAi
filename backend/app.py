@@ -13,8 +13,8 @@ from flask import Flask, request, send_file
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 import io
-from ai.report_chain import generate_report 
-from ai.location_fecth import get_location 
+from backend.ai.report_chain import generate_report 
+from backend.ai.location_fecth import get_location 
 
 from pydantic import BaseModel
 from reportlab.lib.utils import ImageReader
