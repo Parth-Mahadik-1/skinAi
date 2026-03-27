@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result | SkinAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+</head>
+<body>
+
+{% include 'navbar.html' %}
+
+<!-- MAIN WRAPPER -->
+<div class="result-wrapper">
+
+    <!-- LEFT : RESULT CARD -->
+    <div class="result-left">
+        <div class="container">
+
+            <h2>Prediction Result</h2>
+
+            <!-- Uploaded Image -->
+            <img src="/{{ image_path }}" class="result-img" alt="Uploaded Skin Image">
+
+            <!-- Prediction Box -->
+            <div class="prediction-box">
+
+                <p class="acne-type">
+                    <strong>Acne Type:</strong> {{ acne_type }}
+                </p>
+
+                {% if confidence is defined %}
+                <!-- Confidence Bar -->
+                <div class="confidence-bar">
+                    <div class="confidence-fill {{ confidence_class }}"
+                         style="width: {{ confidence }}%;">
+                    </div>
+                </div>
+
+                <span class="confidence-text">{{ confidence }}%</span>
+                {% endif %}
+
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="action-buttons">
+                <button onclick="downloadReport()" class="btn-primary">
+                     📄 Download Report
+                </button>
+
+                <a href="/upload" class="btn-secondary">
+                    Analyze Another Image
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- RIGHT : INFO PANEL -->
+    <div class="result-right">
+        <div class="result-info-wrapper">
+            <div class="result-info">
+
+                <h3>Understanding Your Result</h3>
+                <p>
+                    SkinAI analyzed your image and detected
+                    <b>{{ acne_type }}</b>
+                    {% if confidence is defined %}
+                        with a confidence of <b>{{ confidence }}%</b>.
+                    {% endif %}
+                    This acne type is commonly linked to clogged pores and excess oil production.
+                </p>
+
+                <h3>Recommended Care Tips</h3>
+                <ul class="care-tips">
+                    <li>Clean your face twice daily with a gentle cleanser</li>
+                    <li>Avoid touching or squeezing affected areas</li>
+                    <li>Use oil-free, non-comedogenic products</li>
+                    <li>Maintain a consistent skincare routine</li>
+                </ul>
+
+                {% if confidence is defined %}
+                <div class="ai-confidence">
+                    🔬 <strong>AI Confidence:</strong> {{ confidence }}%
+                    <div>✔ Deep learning powered analysis</div>
+                    <div>✔ Dermatology-validated dataset</div>
+                </div>
+                {% endif %}
+
+                <p class="disclaimer">
+                    ⚠️ This is an AI-based prediction and not a medical diagnosis.
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<button onclick="downloadReport()">Download Report</button>
+
+<script>
+function downloadReport() {
+    fetch("/download-report", { method: "POST" })
+    .then(res => res.blob())
+    .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "SkinAI_Report.pdf";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+    });
+}
+</script>
+</body>
+</html>

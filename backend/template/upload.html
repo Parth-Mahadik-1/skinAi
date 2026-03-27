@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Image | SkinAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='upload.css') }}">
+</head>
+<body>
+
+    {% include 'navbar.html' %}
+
+<!-- Left: text -->
+<div class="main-wrapper">
+
+  <!-- LEFT COLUMN -->
+  <div class="info-area">
+
+  <h1 class="info-title">
+    How <span>SkinAI</span> Works
+  </h1>
+
+  <ol class="info-steps">
+    <li>Upload clear photo</li>
+    <li>AI analyzes acne type</li>
+    <li>Get instant diagnosis + care tips</li>
+  </ol>
+
+  <ul class="info-checks">
+    <li>98% accurate deep learning</li>
+    <li>Dermatologist validated</li>
+    <li>Privacy protected</li>
+  </ul>
+
+  <p class="info-trust">
+    Trusted by <strong>5K+ users</strong>
+  </p>
+
+</div>
+
+  <!-- Right: Upload -->
+  
+<div class="container">
+  <h2 class="upload-title">Upload Your Skin Image</h2>
+  
+  <form action="/process" method="POST" enctype="multipart/form-data" id="uploadForm">
+    <div class="upload-box" id="dropZone">
+  <input type="file" name="image" id="imgInput" accept="image/*" required>
+  <div class="upload-placeholder">
+    <div class="upload-icon">📷</div>
+  </div>
+  <p class="upload-text">Choose Image File</p>
+  <p class="upload-subtext">Drag & drop or click to browse</p>
+  <div class="no-file-text">No file chosen</div>
+</div>
+<!-- Camera Controls -->
+<div class="camera-controls">
+  <button type="button" id="openCamera">Use Live Camera</button>
+</div>
+
+<!-- Camera Modal -->
+<div class="camera-modal" id="cameraModal">
+  <video id="video" autoplay></video>
+  <canvas id="canvas"></canvas>
+
+  <div class="camera-actions">
+    <button type="button" id="captureBtn">Capture</button>
+    <button type="button" id="closeCamera">Close</button>
+  </div>
+</div>
+    
+    <!-- Preview -->
+    <img id="preview" class="result-img">
+    
+    <button type="submit" id="analyzeBtn" disabled>Analyze</button>
+  </form>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const dropZone = document.getElementById('dropZone');
+    const imgInput = document.getElementById('imgInput');
+    const preview = document.getElementById('preview');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+
+    function handleFile(file) {
+        if (!file || !file.type.startsWith('image/')) return;
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            preview.src = reader.result;
+            preview.style.display = 'block';
+            dropZone.style.display = 'none';
+            analyzeBtn.disabled = false;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // FILE SELECT
+    imgInput.addEventListener('change', () => {
+        if (imgInput.files.length > 0) {
+            handleFile(imgInput.files[0]);
+        }
+    });
+
+    // DRAG & DROP
+    ['dragenter','dragover','dragleave','drop'].forEach(e => {
+        dropZone.addEventListener(e, ev => {
+            ev.preventDefault();
+            ev.stopPropagation();
+        });
+    });
+
+    dropZone.addEventListener('drop', e => {
+        const file = e.dataTransfer.files[0];
+        if (file) {
+            imgInput.files = e.dataTransfer.files;
+            handleFile(file);
+        }
+    });
+});
+
+const openCameraBtn = document.getElementById('openCamera');
+const cameraModal = document.getElementById('cameraModal');
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const captureBtn = document.getElementById('captureBtn');
+const closeCameraBtn = document.getElementById('closeCamera');
+
+let stream = null;
+
+/* OPEN CAMERA */
+openCameraBtn.addEventListener('click', async () => {
+    cameraModal.style.display = 'flex';
+    stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    video.srcObject = stream;
+});
+
+/* CAPTURE PHOTO */
+captureBtn.addEventListener('click', () => {
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0);
+
+    const dataURL = canvas.toDataURL('image/jpeg');
+
+    preview.src = dataURL;
+    preview.style.display = 'block';
+    dropZone.style.display = 'none';
+    analyzeBtn.disabled = false;
+
+    /* Convert to File & attach to input */
+    fetch(dataURL)
+      .then(res => res.blob())
+      .then(blob => {
+          const file = new File([blob], "camera.jpg", { type: "image/jpeg" });
+          const dataTransfer = new DataTransfer();
+          dataTransfer.items.add(file);
+          imgInput.files = dataTransfer.files;
+      });
+
+    closeCamera();
+});
+
+/* CLOSE CAMERA */
+function closeCamera() {
+    cameraModal.style.display = 'none';
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+    }
+}
+
+closeCameraBtn.addEventListener('click', closeCamera);
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}">
+
+</head>
+<body>
+
+<!-- Nav bar -->
+{% include 'navbar.html' %}
+
+
+
+
+<!-- Left Side Info Area -->
+ <div class="main-wrapper">
+        <div class="info-area">
+            <h1 class="info-title">Welcome to <span style="color:#ff914d;">SkinAI</span></h1>
+
+            <h2 class="info-text">
+                From pixels to perfect skin — 
+                <span class="highlight">let AI guide the way.</span>
+            </h2>
+
+            <p class="info-subtext">
+                Upload your image and get instant, AI-driven acne insights tailored just for you.
+            </p>
+
+            <h2 class="sub-title">About Us</h2>
+            <ul class="info-list">
+                <li>Instant insights for healthy skin management</li>
+                <li>Powered by cutting-edge deep learning</li>
+                <li>Designed for users and professionals alike</li>
+            </ul>
+        </div>
+
+
+<!-- Right Side Login Box -->
+<div class="container">
+   <div class="form-box">
+  <h2 class="login-title">Details</h2>
+
+  <form method="POST" action="/login">
+    <div class="form-inner">
+      <input type="text" name="username" placeholder="Enter Username" required>
+      <select name="role" required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="normal">Normal User</option>
+        <option value="dermatologist">Dermatologist</option>
+      </select>
+        <input type="text" name="location" placeholder="Enter Location (e.g. Andheri)" required>
+      <button type="submit">Enter</button>
+    </div>
+  </form>
+</div>
+</div>
+</div>
+{% include 'footer.html' %}
+</body>
+</html>

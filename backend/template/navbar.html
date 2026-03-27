@@ -1,0 +1,25 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+</head>
+
+
+<nav class="navbar-center">
+    <!-- Left: Logo + Brand Name -->
+    <div class="nav-left">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="SkinAI Logo" class="logo">
+        </a>
+        <a href="{{ url_for('home') }}" class="brand-name">SkinAI</a>
+    </div>
+
+    <!-- Center: Navigation Links -->
+    <ul class="nav-links-center">
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('upload_img') }}">Upload</a></li>
+        <li><a href="{{ url_for('result') }}">Result</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+    </ul>
+</nav>

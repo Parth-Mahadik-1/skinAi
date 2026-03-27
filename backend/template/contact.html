@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | SkinAI</title>
+
+    <!-- Existing CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='contact.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}">
+</head>
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="main-wrapper">
+    <div class="info-area" style="max-width: 600px; margin: auto;">
+
+        <h1 class="info-title">
+            Contact <span style="color:#ff914d;">Me</span>
+        </h1>
+
+        <p class="info-subtext">
+            Feel free to reach out for collaborations, project discussions, or queries.
+        </p>
+
+        <ul class="info-list" style="font-size: 18px;">
+
+            <li>
+                📞 <strong>Phone:</strong>
+                <a href="tel:+91 8530611635">+91 8530611635</a>
+            </li>
+
+            <li>
+                📧 <strong>Email:</strong>
+                <a href="mailto:yourmail@gmail.com">parthtech2618@gmail.com</a>
+            </li>
+
+            <li>
+                💻 <strong>GitHub:</strong>
+                <a href="https://github.com/Parth-Mahadik-1" target="">
+                    Parth-Mahadik - GitHub
+                </a>
+            </li>
+
+            <li>
+                🔗 <strong>LinkedIn:</strong>
+                <a href="https://www.linkedin.com/in/parth-mahadik/" target="_blank">
+                    Parth-Mahadik - Linkedin
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+</div>
+{% include 'footer.html' %}
+</body>
+</html>
