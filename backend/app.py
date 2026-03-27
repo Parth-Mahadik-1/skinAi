@@ -96,10 +96,11 @@ def predict_acne(img_path):
 
 '''
 
-client = Client("ParthHuggFace/modelbackedn")
+
 
 def predict_acne(img_path):
     try:
+        client = Client("ParthHuggFace/modelbackedn")
         result = client.predict(
             img_path,
             api_name="/predict"
