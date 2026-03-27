@@ -28,11 +28,17 @@ from gradio_client import Client
 # App setup
 # ---------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+
+print("TEMPLATE DIR:", TEMPLATE_DIR)
+print("FILES INSIDE TEMPLATE:", os.listdir(TEMPLATE_DIR) if os.path.exists(TEMPLATE_DIR) else "NOT FOUND")
+
 
 app = Flask(
     __name__,
-    template_folder=os.path.join(BASE_DIR, "templates"),
-    static_folder=os.path.join(BASE_DIR, "static")
+    template_folder=TEMPLATE_DIR
+    static_folder=STATIC_DIR
 )
 
 app.secret_key = "skinai_secret_key"
