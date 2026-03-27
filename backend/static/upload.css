@@ -1,0 +1,315 @@
+/* ===============================
+   GLOBAL
+================================ */
+
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #0d0d0d;
+    color: #fff;
+    
+    
+    
+}
+
+/* ===============================
+   CONTAINER
+================================ */
+.container {
+    background: #111;
+    width: 480px;
+    padding: 55px 50px 60px;
+    border-radius: 18px;
+    box-shadow: 0px 0px 25px rgba(255, 145, 77, 0.35);
+    text-align: center;
+    animation: fadeInRight 0.9s ease-out;
+}
+
+/* ===============================
+   TITLE
+================================ */
+.upload-title {
+    font-size: 2rem;
+    margin-bottom: 32px;
+    color: #ff914d;
+}
+
+/* ===============================
+   UPLOAD BOX
+================================ */
+.upload-box {
+    border: 2.5px dashed #4a90e2;
+    border-radius: 20px;
+    height: 280px;
+    padding: 30px 20px;
+    background: linear-gradient(145deg, #1e1e1e, #0f0f0f);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    margin-bottom: 28px;
+    position: relative;
+}
+
+.upload-box:hover,
+.upload-box.drag-over {
+    border-color: #ff914d;
+    background: linear-gradient(135deg, #2a1a00, #1f0f00);
+    box-shadow: 0 0 40px rgba(255, 145, 77, 0.4);
+}
+
+/* ===============================
+   PLACEHOLDER ICON
+================================ */
+.upload-placeholder {
+    width: 120px;
+    height: 120px;
+    border: 4px dashed #4a90e2;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 26px;
+    background: rgba(74, 144, 226, 0.05);
+    transition: all 0.3s ease;
+}
+
+.upload-box:hover .upload-placeholder {
+    border-color: #ff914d;
+    background: rgba(255, 145, 77, 0.1);
+}
+
+.upload-icon {
+    font-size: 3.8rem;
+    color: #4a90e2;
+}
+
+/* ===============================
+   UPLOAD TEXT
+================================ */
+.upload-text {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.upload-subtext {
+    font-size: 0.95rem;
+    color: #aaa;
+    margin-bottom: 14px;
+}
+
+.no-file-text {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* ===============================
+   FILE INPUT (HIDDEN)
+================================ */
+#imgInput {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* ===============================
+   IMAGE PREVIEW
+================================ */
+.result-img,
+.preview-img {
+    width: 100%;
+    max-width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 14px;
+    margin: 24px auto;
+    display: none;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+}
+
+/* ===============================
+   ANALYZE BUTTON
+================================ */
+button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 15px;
+    background: linear-gradient(135deg, #ff914d, #ffa76b);
+    color: #111;
+    border: none;
+    border-radius: 14px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    animation: buttonPulse 2s infinite;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 145, 77, 0.5);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    animation: none;
+}
+
+/* ===============================
+   Left side text
+================================ */
+.main-wrapper {
+    display: flex;
+    gap: 80px;
+    max-width: 1300px;
+    margin: 120px auto 60px;
+    padding: 0 40px;
+    align-items: center;
+    margin-top: 180px;
+}
+
+/* LEFT TEXT */
+.info-area {
+    flex: 1.1;
+}
+
+.info-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.info-title span {
+    color: #ff914d;
+}
+
+.info-tagline {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: #eee;
+}
+
+.info-desc {
+    font-size: 1rem;
+    color: #aaa;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.info-subtitle {
+    font-size: 1.2rem;
+    color: #ff914d;
+    margin-bottom: 12px;
+}
+
+.info-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.info-list li {
+    margin-bottom: 10px;
+    color: #ddd;
+    position: relative;
+    padding-left: 20px;
+}
+
+.info-list li::before {
+    content: "•";
+    color: #ff914d;
+    position: absolute;
+    left: 0;
+}
+/* ===============================
+   CAMERA FEATURE
+================================ */
+
+.camera-controls button {
+    margin-bottom: 18px;
+    background: transparent;
+    border: 2px solid #4a90e2;
+    color: #4a90e2;
+}
+
+.camera-controls button:hover {
+    background: #4a90e2;
+    color: #111;
+}
+
+/* MODAL */
+.camera-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.camera-modal video {
+    width: 420px;
+    max-width: 90%;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(255,145,77,0.5);
+}
+
+.camera-modal canvas {
+    display: none;
+}
+
+.camera-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.camera-actions button {
+    width: 140px;
+}
+
+
+/* ===============================
+   ANIMATIONS
+================================ */
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes buttonPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 145, 77, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 12px rgba(255, 145, 77, 0);
+    }
+}
+
+/* SUBTLE ANIMATION */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

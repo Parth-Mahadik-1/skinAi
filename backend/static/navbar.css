@@ -1,0 +1,58 @@
+/* NAVBAR CONTAINER */
+.navbar-center {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 20px;        /* distance from top */
+    z-index: 10;
+}
+
+/* LEFT SIDE — Logo + Brand Name */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;       /* Space between logo and text */
+    position: absolute;
+    left: 40px;      /* Slightly from left */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Logo */
+.logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Brand Name */
+.brand-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+
+/* NAV LINKS */
+.nav-links-center {
+    background: #111;
+    padding: 12px 30px;
+    border-radius: 40px;
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    box-shadow: 0px 0px 15px rgba(255, 145, 77, 0.25);
+}
+
+.nav-links-center li a {
+    text-decoration: none;
+    color: #ddd;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.nav-links-center li a:hover {
+    color: #ff914d;
+}
