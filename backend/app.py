@@ -37,7 +37,7 @@ print("FILES INSIDE TEMPLATE:", os.listdir(TEMPLATE_DIR) if os.path.exists(TEMPL
 
 app = Flask(
     __name__,
-    template_folder=TEMPLATE_DIR
+    template_folder=TEMPLATE_DIR,
     static_folder=STATIC_DIR
 )
 
